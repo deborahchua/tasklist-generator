@@ -1,0 +1,17 @@
+
+<h1>List of tasklists</h1>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Path (base_path)</th>
+  </tr>
+
+  <% @tasklists.each do |tasklist| %>
+    <tr>
+      <td><%= tasklist.title %></td>
+      <td><%= tasklist.base_path %></td>
+      <td><%= link_to 'Show', tasklist_path(tasklist) %></td>
+    </tr>
+  <% end %>
+</table>

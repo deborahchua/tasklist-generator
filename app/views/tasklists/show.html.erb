@@ -1,0 +1,53 @@
+<p>
+  <strong><%= @tasklist.title %></strong>
+</p>
+
+<p>
+  <strong><%= @tasklist.base_path %></strong>
+</p>
+
+<p>
+  <%= @tasklist.description %>
+</p>
+
+<p><em><%= @tasklist.meta_description %></em></p>
+
+
+{<br>
+  "title": "<%= @tasklist.title %>",<br>
+  "base_path": "<%= @tasklist.base_path %>",<br>
+  "description": "<%= @tasklist.description %>",<br>
+  "tasklist": {
+    "groups": [
+      [
+        {
+          "title": "<step.title>",
+          "contents": [ //for each paragraph/link
+            {
+              "type": "paragraph",
+              "text": "Most people can start learning to drive when they’re 17."
+            },
+            {
+              "type": "list",
+              "style": "required",
+              "contents": [ //for loop through Step.Content.links
+                {
+                  "href": "/vehicles-can-drive",
+                  "text": "Check what age you can drive"
+                },
+                {
+                  "href": "/legal-obligations-drivers-riders",
+                  "text": "Requirements for driving legally"
+                },
+                {
+                  "href": "/driving-eyesight-rules",
+                  "text": "Driving eyesight rules"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    ]
+  }
+}
