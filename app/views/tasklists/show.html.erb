@@ -48,6 +48,31 @@
   }<br> -->
 }<br><br>
 
+<h2>Steps</h2>
+<% @tasklist.steps.each do |step| %>
+  <p>
+    <strong>Title:</strong>
+    <%= step.step_number %> <%= step.title %>
+  </p>
+
+  <p>
+    <strong>Description:</strong>
+    <%= step.description %>
+  </p>
+  <p>
+    <strong>Optional:</strong>
+    <%= step.optional %>
+  </p>
+  <p>
+    <%= link_to 'Edit step', edit_tasklist_step_path(@tasklist, step) %> | <%= link_to 'Delete step', [step.tasklist, step],
+                   method: :delete,
+                   data: { confirm: 'Are you sure?' } %>
+  </p>
+
+  <hr />
+
+<% end %>
+
 <h2>Add a step:</h2>
 
 <%= form_for ([@tasklist, @tasklist.steps.build]) do |f| %>
