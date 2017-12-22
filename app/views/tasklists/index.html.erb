@@ -1,6 +1,8 @@
 
 <h1>List of tasklists</h1>
 
+<%= link_to 'Create a new tasklist', new_tasklist_path %>
+
 <table>
   <tr>
     <th>Title</th>
@@ -12,6 +14,8 @@
       <td><%= tasklist.title %></td>
       <td><%= tasklist.base_path %></td>
       <td><%= link_to 'Show', tasklist_path(tasklist) %></td>
+      <td><%= link_to 'Edit', edit_tasklist_path(tasklist) %></td>
+      <td><%= link_to 'Delete', tasklist_path(tasklist) %></td>
     </tr>
   <% end %>
 </table>

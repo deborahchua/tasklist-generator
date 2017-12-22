@@ -17,37 +17,35 @@
   "title": "<%= @tasklist.title %>",<br>
   "base_path": "<%= @tasklist.base_path %>",<br>
   "description": "<%= @tasklist.description %>",<br>
-  "tasklist": {
-    "groups": [
-      [
-        {
-          "title": "<step.title>",
-          "contents": [ //for each paragraph/link
-            {
-              "type": "paragraph",
-              "text": "Most people can start learning to drive when they’re 17."
-            },
-            {
-              "type": "list",
-              "style": "required",
-              "contents": [ //for loop through Step.Content.links
-                {
-                  "href": "/vehicles-can-drive",
-                  "text": "Check what age you can drive"
-                },
-                {
-                  "href": "/legal-obligations-drivers-riders",
-                  "text": "Requirements for driving legally"
-                },
-                {
-                  "href": "/driving-eyesight-rules",
-                  "text": "Driving eyesight rules"
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    ]
-  }
-}
+  <!-- "tasklist": {<br>
+    "groups": [<br>
+      [<br>
+        {<br>
+          "title": "<step.title>",<br>
+          "contents": [ //for each paragraph/link<br>
+            {<br>
+              "type": "paragraph",<br>
+              "text": "Most people can start learning to drive when they’re 17."<br>
+            },<br>
+            {<br>
+              "type": "list",<br>
+              "style": "required",<br>
+              "contents": [ //for loop through Step.Content.links<br>
+                {<br>
+                  "href": "/vehicles-can-drive",<br>
+                  "text": "Check what age you can drive"<br>
+                },<br>
+                {<br>
+                  "href": "/legal-obligations-drivers-riders",<br>
+                  "text": "Requirements for driving legally"<br>
+                }<br>
+              ]<br>
+            }<br>
+          ]<br>
+        }<br>
+      ]<br>
+    ]<br>
+  }<br> -->
+}<br><br>
+
+<%= link_to 'Edit', edit_tasklist_path(@tasklist) %> | <%= link_to 'Back to tasklists', tasklists_path %>
