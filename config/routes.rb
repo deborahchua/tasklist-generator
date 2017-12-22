@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :tasklists do
     resources :steps do
-      resources :content
+      resources :contents
     end
   end
 

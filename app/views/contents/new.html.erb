@@ -1,0 +1,30 @@
+
+  <%=  form_for :content, url: tasklist_step_contents_path, :method => :POST do |f| %>
+
+            <p>
+              <%= f.radio_button :type, "paragraph" %>
+              <%= f.label :type, "Paragraph" %>
+              <%= f.radio_button :type, "list" %>
+              <%= f.label :type, "List" %>
+            </p>
+            <p>
+              <%= f.label :text, "Text / link text" %><br>
+              <%= f.text_area :text %>
+            </p>
+            <p>
+              <%= f.label :url %><br>
+              <%= f.text_field :url %>
+            </p>
+            <p>
+              <%= f.label :context, "Context e.g. cost details" %><br>
+              <%= f.text_field :context %>
+            </p>
+
+            <p>
+              <%= f.label :style, "List style" %><br>
+              <%= f.select :style, ['required', 'choice']%>
+            </p>
+            <p>
+              <%= f.submit %>
+            </p>
+          <% end %> <br>
