@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171222163708) do
+ActiveRecord::Schema.define(version: 20171222170916) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,10 +18,11 @@ ActiveRecord::Schema.define(version: 20171222163708) do
   create_table "steps", force: :cascade do |t|
     t.string   "title"
     t.text     "description"
-    t.string   "optional"
     t.integer  "tasklist_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "step_number"
+    t.boolean  "optional"
     t.index ["tasklist_id"], name: "index_steps_on_tasklist_id", using: :btree
   end
 
