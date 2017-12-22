@@ -10,10 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171222170916) do
+ActiveRecord::Schema.define(version: 20171222183027) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "contents", force: :cascade do |t|
+    t.string   "type"
+    t.string   "url"
+    t.text     "text"
+    t.string   "context"
+    t.string   "style"
+    t.integer  "step_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["step_id"], name: "index_contents_on_step_id", using: :btree
+  end
 
   create_table "steps", force: :cascade do |t|
     t.string   "title"
@@ -35,5 +47,6 @@ ActiveRecord::Schema.define(version: 20171222170916) do
     t.string   "base_path"
   end
 
+  add_foreign_key "contents", "steps"
   add_foreign_key "steps", "tasklists"
 end
