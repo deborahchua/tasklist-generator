@@ -15,7 +15,9 @@
       <td><%= tasklist.base_path %></td>
       <td><%= link_to 'Show', tasklist_path(tasklist) %></td>
       <td><%= link_to 'Edit', edit_tasklist_path(tasklist) %></td>
-      <td><%= link_to 'Delete', tasklist_path(tasklist) %></td>
+      <td><%= link_to 'Delete', tasklist_path(tasklist),
+              method: :delete,
+              data: { confirm: "Are you sure?" } %></td>
     </tr>
   <% end %>
 </table>

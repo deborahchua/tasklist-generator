@@ -35,6 +35,13 @@ class TasklistsController < ApplicationController
     end
   end
 
+  def destroy
+    @tasklist = Tasklist.find(params[:id])
+    @tasklist.destroy
+
+    redirect_to tasklists_path
+  end
+
   private
   def tasklist_params
     params.require(:tasklist).permit(:title, :description, :base_path, :meta_description)
