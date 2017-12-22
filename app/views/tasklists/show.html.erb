@@ -56,7 +56,63 @@
 }<br><br>
 
 <h2>Steps</h2>
-<%= render @tasklist.steps %>
+<% @tasklist.steps.each do |step| %>
+
+  <p>
+    <strong>Step number:</strong>
+    <%= step.step_number %>
+  </p>
+
+  <p>
+    <strong>Title:</strong>
+    <%= step.title %>
+  </p>
+
+  <p>
+    <strong>Description:</strong>
+    <%= step.description %>
+  </p>
+  <p>
+    <strong>Optional:</strong>
+    <%= step.optional %>
+  </p>
+  <p>
+    <%= link_to 'Edit step', edit_tasklist_step_path(@tasklist, step) %> | <%= link_to 'Delete step', [step.tasklist, step],
+                   method: :delete,
+                   data: { confirm: 'Are you sure?' } %>
+  </p>
+
+  <h2>Content</h2>
+  <%= step.contents do |content| %>
+    <p>
+      <strong>Type:</strong>
+      <%= content.content_type %>
+    </p>
+    <p>
+      <strong>Text:</strong>
+      <%= content.text %>
+    </p>
+    <p>
+      <strong>Url:</strong>
+      <%= content.url %>
+    </p>
+    <p>
+      <strong>Context:</strong>
+      <%= content.context %>
+    </p>
+    <p>
+      <strong>List style:</strong>
+      <%= content.style %>
+    </p>
+  <% end %>
+
+<hr>
+
+  <h2>Add content:</h2>
+  <%= link_to 'Add content', new_tasklist_step_content_path(@tasklist, step) %>
+<% end %>
+  <hr />
+
 
 <h2>Add a step:</h2>
 
