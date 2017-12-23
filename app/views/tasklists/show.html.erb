@@ -1,4 +1,7 @@
-<h1>Tasklist</h1>
+<h1>Tasklist: <%= @tasklist.title %></h1>
+
+<p><%= link_to "Edit tasklist details", edit_tasklist_path(@tasklist) %></p>
+
 <p>
   <strong>Tasklist title:</strong>
   <%= @tasklist.title %>
@@ -24,39 +27,22 @@
   "title": "<%= @tasklist.title %>",<br>
   "base_path": "<%= @tasklist.base_path %>",<br>
   "description": "<%= @tasklist.description %>",<br>
-  <!-- "tasklist": {<br>
-    "groups": [<br>
-      [<br>
-        {<br>
-          "title": "<step.title>",<br>
-          "contents": [ //for each paragraph/link<br>
-            {<br>
-              "type": "paragraph",<br>
-              "text": "Most people can start learning to drive when they’re 17."<br>
-            },<br>
-            {<br>
-              "type": "list",<br>
-              "style": "required",<br>
-              "contents": [ //for loop through Step.Content.links<br>
-                {<br>
-                  "href": "/vehicles-can-drive",<br>
-                  "text": "Check what age you can drive"<br>
-                },<br>
-                {<br>
-                  "href": "/legal-obligations-drivers-riders",<br>
-                  "text": "Requirements for driving legally"<br>
-                }<br>
-              ]<br>
-            }<br>
-          ]<br>
-        }<br>
-      ]<br>
-    ]<br>
-  }<br> -->
+
 }<br><br>
 
+<hr>
+
 <h2>Steps</h2>
+
 <% @tasklist.steps.each do |step| %>
+
+<strong>Step <%= step.step_number %> <%= step.title %></strong>
+
+<p>
+  <%= link_to 'Edit step', edit_tasklist_step_path(@tasklist, step) %> | <%= link_to 'Delete step', [step.tasklist, step],
+                 method: :delete,
+                 data: { confirm: 'Are you sure?' } %>
+</p>
 
   <p>
     <strong>Step number:</strong>
@@ -76,14 +62,14 @@
     <strong>Optional:</strong>
     <%= step.optional %>
   </p>
+
+  <h2>Content</h2>
+  <%= @contents.each do |content| %>
   <p>
-    <%= link_to 'Edit step', edit_tasklist_step_path(@tasklist, step) %> | <%= link_to 'Delete step', [step.tasklist, step],
+    <%= link_to 'Edit content', edit_tasklist_step_content_path(@tasklist, step, content) %> |<%= link_to 'Delete content', tasklist_step_content_path(@tasklist, step, content),
                    method: :delete,
                    data: { confirm: 'Are you sure?' } %>
   </p>
-
-  <h2>Content</h2>
-  <%= step.contents do |content| %>
     <p>
       <strong>Type:</strong>
       <%= content.content_type %>
