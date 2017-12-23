@@ -1,0 +1,28 @@
+<h2>Content</h2>
+<%= @contents.each do |content| %>
+<p>
+  <%= link_to 'Edit content', edit_tasklist_step_content_path(@tasklist, step, content) %> |<%= link_to 'Delete content', tasklist_step_content_path(@tasklist, step, content),
+                 method: :delete,
+                 data: { confirm: 'Are you sure?' } %>
+</p>
+  <p>
+    <strong>Type:</strong>
+    <%= content.content_type %>
+  </p>
+  <p>
+    <strong>Text:</strong>
+    <%= content.text %>
+  </p>
+  <p>
+    <strong>Url:</strong>
+    <%= content.url %>
+  </p>
+  <p>
+    <strong>Context:</strong>
+    <%= content.context %>
+  </p>
+  <p>
+    <strong>List style:</strong>
+    <%= content.style %>
+  </p>
+<% end %>

@@ -1,4 +1,7 @@
-<h1>Tasklist</h1>
+<h1>Tasklist: <%= @tasklist.title %></h1>
+
+<p><%= link_to "Edit tasklist details", edit_tasklist_path(@tasklist) %></p>
+
 <p>
   <strong>Tasklist title:</strong>
   <%= @tasklist.title %>
@@ -24,39 +27,22 @@
   "title": "<%= @tasklist.title %>",<br>
   "base_path": "<%= @tasklist.base_path %>",<br>
   "description": "<%= @tasklist.description %>",<br>
-  <!-- "tasklist": {<br>
-    "groups": [<br>
-      [<br>
-        {<br>
-          "title": "<step.title>",<br>
-          "contents": [ //for each paragraph/link<br>
-            {<br>
-              "type": "paragraph",<br>
-              "text": "Most people can start learning to drive when they’re 17."<br>
-            },<br>
-            {<br>
-              "type": "list",<br>
-              "style": "required",<br>
-              "contents": [ //for loop through Step.Content.links<br>
-                {<br>
-                  "href": "/vehicles-can-drive",<br>
-                  "text": "Check what age you can drive"<br>
-                },<br>
-                {<br>
-                  "href": "/legal-obligations-drivers-riders",<br>
-                  "text": "Requirements for driving legally"<br>
-                }<br>
-              ]<br>
-            }<br>
-          ]<br>
-        }<br>
-      ]<br>
-    ]<br>
-  }<br> -->
+
 }<br><br>
 
+<hr>
+
 <h2>Steps</h2>
+
 <% @tasklist.steps.each do |step| %>
+
+  <h3><strong>Step <%= step.step_number %> <%= step.title %></strong></h3>
+
+  <p>
+    <%= link_to 'Edit step', edit_tasklist_step_path(@tasklist, step) %> | <%= link_to 'Delete step', [step.tasklist, step],
+    method: :delete,
+    data: { confirm: 'Are you sure?' } %>
+  </p>
 
   <p>
     <strong>Step number:</strong>
@@ -76,14 +62,25 @@
     <strong>Optional:</strong>
     <%= step.optional %>
   </p>
-  <p>
-    <%= link_to 'Edit step', edit_tasklist_step_path(@tasklist, step) %> | <%= link_to 'Delete step', [step.tasklist, step],
-                   method: :delete,
-                   data: { confirm: 'Are you sure?' } %>
-  </p>
 
   <h2>Content</h2>
-  <%= step.contents do |content| %>
+  <p><%= link_to 'Add content', new_tasklist_step_content_path(@tasklist, step) %></p>
+
+  <%= step.contents.each do |content| %>
+
+    <p>
+      <% case content.content_type %>
+      <% when "paragraph" %>
+      <strong>paragraph</strong>
+      <% when "link"%>
+      <strong>link</strong>
+      <% when "list"%>
+      <strong>list</strong>
+      <% else %>
+      <strong>Content type not set</strong>
+      <% end %>
+    </p>
+
     <p>
       <strong>Type:</strong>
       <%= content.content_type %>
@@ -96,46 +93,54 @@
       <strong>Url:</strong>
       <%= content.url %>
     </p>
+
+    <% unless content.context.empty? %>
     <p>
       <strong>Context:</strong>
       <%= content.context %>
     </p>
+    <% end %>
+
+    <% if content.content_type.eql?("list") %>
     <p>
       <strong>List style:</strong>
       <%= content.style %>
     </p>
+    <% end %>
+    <p>
+      <%= link_to 'Edit content', edit_tasklist_step_content_path(@tasklist, step, content) %> |
+      <%= link_to 'Delete content', tasklist_step_content_path(@tasklist, step, content),
+      method: :delete,
+      data: { confirm: 'Are you sure?' } %>
+    </p>
+    <p>==================================</p>
   <% end %>
-
-<hr>
-
-  <h2>Add content:</h2>
-  <%= link_to 'Add content', new_tasklist_step_content_path(@tasklist, step) %>
 <% end %>
-  <hr />
+<hr />
 
 
 <h2>Add a step:</h2>
 
 <%= form_for ([@tasklist, @tasklist.steps.build]) do |f| %>
-  <p>
-    <%= f.label :step_number, "Step number" %><br>
-    <%= f.text_field :step_number %>
-  </p>
-  <p>
-    <%= f.label :title, "Title" %><br>
-    <%= f.text_field :title %>
-  </p>
-  <p>
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
-  </p>
+<p>
+  <%= f.label :step_number, "Step number" %><br>
+  <%= f.text_field :step_number %>
+</p>
+<p>
+  <%= f.label :title, "Title" %><br>
+  <%= f.text_field :title %>
+</p>
+<p>
+  <%= f.label :description %><br>
+  <%= f.text_area :description %>
+</p>
 
-  <p>
-    Optional step? <%= f.check_box :optional %>
-  </p>
-  <p>
-    <%= f.submit %>
-  </p>
+<p>
+  Optional step? <%= f.check_box :optional %>
+</p>
+<p>
+  <%= f.submit %>
+</p>
 <% end %>
 
 <%= link_to 'Edit', edit_tasklist_path(@tasklist) %> | <%= link_to 'Back to tasklists', tasklists_path %>

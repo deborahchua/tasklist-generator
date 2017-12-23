@@ -1,7 +1,7 @@
-<h2>Add content for: Step <%= @step.step_number %> <%= @step.title %></h2>
+<h2>Edit content:</h2>
 
-<div id="add-content">
-  <%=  form_for :content, url: tasklist_step_contents_path, :method => :POST do |f| %>
+<div id="edit-content">
+  <%=  form_for :content, url: tasklist_step_contents_path, :method => :PUT do |f| %>
     <p>
       <%= f.radio_button :content_type, "paragraph" %>
       <%= f.label :content_type, "Paragraph" %>
@@ -33,5 +33,3 @@
   <% end %> <br>
 
 </div>
-
-<%= link_to 'Back to tasklist', tasklist_path(@tasklist) %>
