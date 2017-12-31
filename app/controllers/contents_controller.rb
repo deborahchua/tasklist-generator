@@ -2,15 +2,12 @@ class ContentsController < ApplicationController
   def new
     @tasklist = Tasklist.find(params[:tasklist_id])
     @step = Step.find(params[:step_id])
-<<<<<<< HEAD
   end
 
   def edit
     @tasklist = Tasklist.find(params[:tasklist_id])
     @step = Step.find(params[:step_id])
     @content = @tasklist.contents.find(params[:id])
-=======
->>>>>>> f320856188cab9720e3c31ee16d108a25d3a0701
   end
 
   def show

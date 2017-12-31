@@ -36,7 +36,6 @@
 
 <% @tasklist.steps.each do |step| %>
 
-<<<<<<< HEAD
   <h3><strong>Step <%= step.step_number %> <%= step.title %></strong></h3>
 
   <p>
@@ -44,15 +43,6 @@
     method: :delete,
     data: { confirm: 'Are you sure?' } %>
   </p>
-=======
-<strong>Step <%= step.step_number %> <%= step.title %></strong>
-
-<p>
-  <%= link_to 'Edit step', edit_tasklist_step_path(@tasklist, step) %> | <%= link_to 'Delete step', [step.tasklist, step],
-                 method: :delete,
-                 data: { confirm: 'Are you sure?' } %>
-</p>
->>>>>>> f320856188cab9720e3c31ee16d108a25d3a0701
 
   <p>
     <strong>Step number:</strong>
@@ -74,7 +64,7 @@
   </p>
 
   <h2>Content</h2>
-<<<<<<< HEAD
+
   <p><%= link_to 'Add content', new_tasklist_step_content_path(@tasklist, step) %></p>
 
   <%= step.contents.each do |content| %>
@@ -92,14 +82,6 @@
       <% end %>
     </p>
 
-=======
-  <%= @contents.each do |content| %>
-  <p>
-    <%= link_to 'Edit content', edit_tasklist_step_content_path(@tasklist, step, content) %> |<%= link_to 'Delete content', tasklist_step_content_path(@tasklist, step, content),
-                   method: :delete,
-                   data: { confirm: 'Are you sure?' } %>
-  </p>
->>>>>>> f320856188cab9720e3c31ee16d108a25d3a0701
     <p>
       <strong>Type:</strong>
       <%= content.content_type %>
