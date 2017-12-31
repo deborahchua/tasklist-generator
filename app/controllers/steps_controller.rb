@@ -1,4 +1,9 @@
 class StepsController < ApplicationController
+  def new
+    @tasklist = Tasklist.find(params[:tasklist_id])
+    @step = @tasklist.steps.new
+  end
+
   def edit
     @tasklist = Tasklist.find(params[:tasklist_id])
     @step = @tasklist.steps.find(params[:id])
@@ -7,7 +12,12 @@ class StepsController < ApplicationController
   def create
     @tasklist = Tasklist.find(params[:tasklist_id])
     @step = @tasklist.steps.create(step_params)
-    redirect_to tasklist_path(@tasklist)
+
+    if @step.save
+      redirect_to tasklist_path(@tasklist)
+    else
+      render "new"
+    end
   end
 
   def update
