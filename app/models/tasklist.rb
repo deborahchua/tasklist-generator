@@ -1,5 +1,5 @@
 class Tasklist < ApplicationRecord
-  has_many :steps
+  has_many :steps, dependent: :destroy
 
   has_many :contents, through: :steps
 
