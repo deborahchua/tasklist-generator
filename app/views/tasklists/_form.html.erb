@@ -1,4 +1,17 @@
 <%= form_for :tasklist, url: tasklists_path do |form| %>
+  <% if @tasklist.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@tasklist.errors.count, "error") %> prohibited
+        this article from being saved:
+      </h2>
+      <ul>
+        <% @tasklist.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
   <p>
     <%= form.label :title %><br>
     <%= form.text_field :title %>

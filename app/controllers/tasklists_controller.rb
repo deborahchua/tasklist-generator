@@ -10,6 +10,7 @@ class TasklistsController < ApplicationController
   end
 
   def new
+    @tasklist = Tasklist.new
   end
 
   def edit
