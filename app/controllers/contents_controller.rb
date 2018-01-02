@@ -2,6 +2,7 @@ class ContentsController < ApplicationController
   def new
     @tasklist = Tasklist.find(params[:tasklist_id])
     @step = Step.find(params[:step_id])
+    @content = @step.contents.new
   end
 
   def edit

@@ -2,6 +2,20 @@
 
 <div id="add-content">
   <%=  form_for :content, url: tasklist_step_contents_path, :method => :POST do |f| %>
+  <% if @content.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@content.errors.count, "error") %> prohibited
+        this article from being saved:
+      </h2>
+      <ul>
+        <% @content.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
     <p>
       <%= f.radio_button :content_type, "paragraph" %>
       <%= f.label :content_type, "Paragraph" %>
