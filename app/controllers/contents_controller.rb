@@ -27,7 +27,14 @@ class ContentsController < ApplicationController
   end
 
   def update
+    @tasklist = Tasklist.find(params[:tasklist_id])
+    @content = @tasklist.contents.find(params[:id])
 
+      if @content.update(content_params)
+        redirect_to tasklist_path(@tasklist)
+      else
+        render 'edit'
+      end
   end
   def destroy
     @tasklist = Tasklist.find(params[:tasklist_id])

@@ -1,7 +1,7 @@
 <h2>Edit content:</h2>
 
 <div id="edit-content">
-  <%=  form_for :content, url: tasklist_step_contents_path, :method => :PUT do |f| %>
+  <%=  form_for :content, url: tasklist_step_content_path, :method => :PUT do |f| %>
     <p>
       <%= f.radio_button :content_type, "paragraph" %>
       <%= f.label :content_type, "Paragraph" %>
