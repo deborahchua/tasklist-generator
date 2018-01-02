@@ -68,48 +68,51 @@
   <h2>Content</h2>
 
   <p><%= link_to 'Add content', new_tasklist_step_content_path(@tasklist, step) %></p>
-
+<div id="contents">
   <%= step.contents.each do |content| %>
 
-    <p>
-      <% case content.content_type %>
-      <% when "paragraph" %>
-      <strong>paragraph</strong>
-      <% when "link"%>
-      <strong>link</strong>
-      <% when "list"%>
-      <strong>list</strong>
-      <% else %>
-      <strong>Content type not set</strong>
+      <div class="test">
+      <p>
+        <% case content.content_type %>
+        <% when "paragraph" %>
+        <strong>paragraph</strong>
+        <% when "link"%>
+        <strong>link</strong>
+        <% when "list"%>
+        <strong>list</strong>
+        <% else %>
+        <strong>Content type not set</strong>
+        <% end %>
+      </p>
+
+      <p>
+        <strong>Type:</strong>
+        <%= content.content_type %>
+      </p>
+      <p>
+        <strong>Text:</strong>
+        <%= content.text %>
+      </p>
+      <p>
+        <strong>Url:</strong>
+        <%= content.url %>
+      </p>
+
+      <% unless content.context.empty? %>
+      <p>
+        <strong>Context:</strong>
+        <%= content.context %>
+      </p>
       <% end %>
-    </p>
 
-    <p>
-      <strong>Type:</strong>
-      <%= content.content_type %>
-    </p>
-    <p>
-      <strong>Text:</strong>
-      <%= content.text %>
-    </p>
-    <p>
-      <strong>Url:</strong>
-      <%= content.url %>
-    </p>
+      <% if content.content_type.eql?("list") %>
+      <p>
+        <strong>List style:</strong>
+        <%= content.style %>
+      </p>
 
-    <% unless content.context.empty? %>
-    <p>
-      <strong>Context:</strong>
-      <%= content.context %>
-    </p>
     <% end %>
 
-    <% if content.content_type.eql?("list") %>
-    <p>
-      <strong>List style:</strong>
-      <%= content.style %>
-    </p>
-    <% end %>
     <p>
       <%= link_to 'Edit content', edit_tasklist_step_content_path(@tasklist, step, content) %> |
       <%= link_to 'Delete content', tasklist_step_content_path(@tasklist, step, content),
@@ -117,8 +120,11 @@
       data: { confirm: 'Are you sure?' } %>
     </p>
     <p>==================================</p>
+</div>
   <% end %>
+
 <% end %>
+</div>
 <hr />
 
 
