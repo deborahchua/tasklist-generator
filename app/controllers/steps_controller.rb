@@ -25,7 +25,7 @@ class StepsController < ApplicationController
      @step = @tasklist.steps.find(params[:id])
 
       if @step.update(step_params)
-        redirect_to tasklists_path
+        redirect_to tasklist_path(@tasklist)
       else
         render 'edit'
       end
