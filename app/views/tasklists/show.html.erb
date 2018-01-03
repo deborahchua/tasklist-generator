@@ -2,6 +2,9 @@
 
 <p><%= link_to "Edit tasklist details", edit_tasklist_path(@tasklist) %></p>
 
+<p><%= link_to "Preview tasklist", tasklist_path(@tasklist) %></p>
+
+<p><%= link_to "View json [use partial js hidden]", "tasklist-json" %></p>
 <p>
   <strong>Tasklist title:</strong>
   <%= @tasklist.title %>
@@ -22,13 +25,6 @@
   <em><%= @tasklist.meta_description %></em>
 </p>
 
-<p>JSON</p>
-{<br>
-  "title": "<%= @tasklist.title %>",<br>
-  "base_path": "<%= @tasklist.base_path %>",<br>
-  "description": "<%= @tasklist.description %>",<br>
-
-}<br><br>
 
 <hr>
 

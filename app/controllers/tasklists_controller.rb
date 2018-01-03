@@ -9,6 +9,12 @@ class TasklistsController < ApplicationController
     @contents = @tasklist.contents.all
   end
 
+  def show_json
+    @tasklist = Tasklist.find(params[:id])
+    @steps = @tasklist.steps.all
+    @contents = @tasklist.contents.all
+  end
+
   def new
     @tasklist = Tasklist.new
   end

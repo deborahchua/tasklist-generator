@@ -1,0 +1,39 @@
+<p>JSON</p>
+{<br>
+  "title": "<%= @tasklist.title %>",<br>
+  "base_path": "<%= @tasklist.base_path %>",<br>
+  "description": "<%= @tasklist.description %>",<br>
+  "tasklist": {<br>
+    "groups": [<br>
+    <% @tasklist.steps.each do |step| %>
+      [<br> (beginning of step)
+        {<br>
+          "title": "<%= step.title %>",<br>
+          "optional": <%= step.optional %>,<br>
+          "contents": [ //for each paragraph/link<br>
+          <%= step.contents.each do |content| %>
+            {<br>
+              "type": "<%= content.content_type %>",<br>
+              <% case content.content_type %>
+              <% when "paragraph" %>
+                "text": "<%= content.text %>",<br>
+              <% when "list"%>
+                <strong>list</strong>
+                "style": "<%= content.style %>",<br>
+                "contents": [ //for loop through Step.Content.links<br>
+                  {<br>
+                    "href": "<%= content.url %>",<br>
+                    "text": "<%= content.text %>",<br>
+                    "context": "<%= content.context %>"<br>
+                  }<br>
+                ]<br>
+              <% end %>
+            }<br>
+          <% end %>,
+          ]<br>
+        }<br>
+      ]<br>(end of step)
+      <% end %>
+    ]<br>
+  }<br>
+}<br><br>
