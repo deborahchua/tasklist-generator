@@ -1,0 +1,48 @@
+show index
+
+  <div id="contents" data-url=" <%= sort_tasklist_step_contents_path %> ">
+  <%= @contents.each do |content| %>
+    <div>
+        <p>Position: <%= content.position %></p>
+      <p>
+        <% case content.content_type %>
+        <% when "paragraph" %>
+        <strong>paragraph</strong>
+        <% when "link"%>
+        <strong>link</strong>
+        <% when "list"%>
+        <strong>list</strong>
+        <% else %>
+        <strong>Content type not set</strong>
+        <% end %>
+      </p>
+
+      <p>
+        <strong>Type:</strong>
+        <%= content.content_type %>
+      </p>
+      <p>
+        <strong>Text:</strong>
+        <%= content.text %>
+      </p>
+      <p>
+        <strong>Url:</strong>
+        <%= content.url %>
+      </p>
+
+      <% unless content.context.empty? %>
+      <p>
+        <strong>Context:</strong>
+        <%= content.context %>
+      </p>
+      <% end %>
+
+      <% if content.content_type.eql?("list") %>
+      <p>
+        <strong>List style:</strong>
+        <%= content.style %>
+      </p>
+      <% end %>
+    </div>
+
+    <% end %></div>
