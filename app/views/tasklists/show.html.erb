@@ -4,7 +4,7 @@
 
 <p><%= link_to "Preview tasklist", tasklist_path(@tasklist) %></p>
 
-<p><%= link_to "View json [use partial js hidden]", "tasklist-json" %></p>
+<p><%= link_to "View json [use partial js hidden]", tasklist_path(@tasklist) %></p>
 <p>
   <strong>Tasklist title:</strong>
   <%= @tasklist.title %>
@@ -103,10 +103,12 @@
   <h2>Content</h2>
 
   <p><%= link_to 'Add content', new_tasklist_step_content_path(@tasklist, step) %></p>
-<div id="contents">
+  <p><%= link_to 'Reorder content', tasklist_step_contents_path(@tasklist, step) %></p>
+<div id="contents" data-url=" ">
   <%= step.contents.each do |content| %>
 
       <div class="test">
+        <p>Position: <%= content.position %></p>
       <p>
         <% case content.content_type %>
         <% when "paragraph" %>
