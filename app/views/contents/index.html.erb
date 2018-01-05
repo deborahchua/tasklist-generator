@@ -1,7 +1,7 @@
 show index
 
   <div id="contents" data-url=" <%= sort_tasklist_step_contents_path %> ">
-  <%= @contents.each do |content| %>
+  <% @contents.each do |content| %>
     <div>
         <p>Position: <%= content.position %></p>
       <p>
