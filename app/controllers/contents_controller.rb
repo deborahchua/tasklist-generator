@@ -1,23 +1,25 @@
 class ContentsController < ApplicationController
+  before_action :tasklist_details
+
   def new
-    @tasklist = Tasklist.find(params[:tasklist_id])
-    @step = Step.find(params[:step_id])
     @content = @step.contents.new
   end
 
   def edit
-    @tasklist = Tasklist.find(params[:tasklist_id])
-    @step = Step.find(params[:step_id])
     @content = @tasklist.contents.find(params[:id])
   end
 
-  def show
+  def index
+    @contents = @tasklist.contents.order(:position)
+  end
 
+  def sort
+    params[:content].each_with_index do |id, index|
+        Content.where(id: id).update_all(position: index + 1)
+    end
   end
 
   def create
-    @tasklist = Tasklist.find(params[:tasklist_id])
-    @step = Step.find(params[:step_id])
     @content = @step.contents.new(content_params)
 
     if @content.save
@@ -28,7 +30,6 @@ class ContentsController < ApplicationController
   end
 
   def update
-    @tasklist = Tasklist.find(params[:tasklist_id])
     @content = @tasklist.contents.find(params[:id])
 
       if @content.update(content_params)
@@ -38,8 +39,6 @@ class ContentsController < ApplicationController
       end
   end
   def destroy
-    @tasklist = Tasklist.find(params[:tasklist_id])
-    @step = Step.find(params[:step_id])
     @content = @tasklist.contents.find(params[:id])
     @content.destroy
 
@@ -49,5 +48,10 @@ class ContentsController < ApplicationController
   private
   def content_params
     params.require(:content).permit(:type, :text, :url, :context, :style, :content_type)
+  end
+
+  def tasklist_details
+    @tasklist = Tasklist.find(params[:tasklist_id])
+    @step = Step.find(params[:step_id])
   end
 end
