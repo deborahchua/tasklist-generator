@@ -178,3 +178,9 @@ span.tasklist_context{
 
 span.tasklist_context::before{
   content: " \2013 ";
+}
+
+.editor a{
+  font-size: 19px;
+  color: #ff0000;
+}
