@@ -37,6 +37,11 @@ body{
   width: 66.6666666667%;
 }
 
+.column-one-third {
+  float: left;
+  width: 33.3333333333%;
+}
+
 h1{
   font-size: 36px;
   font-weight: 700;
@@ -183,4 +188,12 @@ span.tasklist_context::before{
 .editor a{
   font-size: 19px;
   color: #ff0000;
+}
+
+.edit-border{
+  border: 1px dashed #808080;
+}
+
+#json_content{
+  font-size: 14px;
 }

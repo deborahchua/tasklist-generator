@@ -1,1 +1,15 @@
-show contents
+
+  <div id="contents" data-url=" <%= sort_tasklist_step_contents_path %> ">
+  <% @contents.each do |content| %>
+    <div>
+        <p>Position: <%= content.position %></p>
+      <p>
+        <%= content.content_type %>
+      </p>
+      <p>
+        <strong>Text:</strong>
+        <%= content.text %>
+      </p>
+    </div>
+
+    <% end %></div>

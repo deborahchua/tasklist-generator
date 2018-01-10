@@ -1,3 +1,19 @@
+===
+
+<% case content.content_type %>
+<% when "paragraph" %>
+  <p><%= content.text %></p>
+<% when "link" %>
+  <li class="tasklist_link">
+    <a class="tasklist_link_item" href="<%= content.url %>"><%= content.text %></a>
+    <% unless content.context.empty? %><span class="tasklist_context"> <%= content.context %></span><% end %>
+      <span class="editor"><%= link_to 'Edit', edit_tasklist_step_content_path(@tasklist, step, content) %> | <%= link_to 'Delete', tasklist_step_content_path(@tasklist, step, content), method: :delete, data: { confirm: 'Are you sure?' } %></span>
+  </li>
+<% end %>
+
+===
+
+
 <div class="grid-row">
   <div class="column-two-thirds">
     <h1>Tasklist: <%= @tasklist.title %></h1>
