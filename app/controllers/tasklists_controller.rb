@@ -23,6 +23,13 @@ class TasklistsController < ApplicationController
     @tasklist = Tasklist.find(params[:id])
   end
 
+  def sort
+    params[:order].each_with_index do |id, index|
+      Content.find(value[:id]).update_attribute(:position,value[:position])
+    end
+    render :nothing => true
+  end
+  
   def create
     # render plain: params[:tasklist].inspect
     @tasklist = Tasklist.new(tasklist_params)

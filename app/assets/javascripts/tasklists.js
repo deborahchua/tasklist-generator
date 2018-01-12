@@ -1,3 +1,4 @@
+var loadEditor
 function toggleJSON() {
     var json_content = document.getElementById("json_content");
     if (json_content.style.display === "none") {
@@ -7,7 +8,7 @@ function toggleJSON() {
     }
 }
 
-$( document ).ready(function() {
+loadEditor = function() {
   $(".tasklist_content").hover(function(){
     $(this).addClass("edit-border");
     }, function(){
@@ -19,4 +20,6 @@ $( document ).ready(function() {
     }, function(){
     $(this).removeClass("edit-border");
   });
-});
+}
+
+$(document).on('turbolinks:load', loadEditor);

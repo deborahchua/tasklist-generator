@@ -1,12 +1,9 @@
 show index
 
-  <div id="contents" data-url=" <%= sort_tasklist_step_contents_path %> ">
-  <% @contents.each do |content| %>
-    <div>
+  <div class="sortable" id="contents">
+  <% @step.contents.each do |content| %>
+    <div class="content_item" data-id="<%= content.id %>">
         <p>Position: <%= content.position %></p>
-      <p>
-        <%= content.content_type %>
-      </p>
       <p>
         <strong>Text:</strong>
         <%= content.text %>
@@ -14,3 +11,5 @@ show index
     </div>
 
     <% end %></div>
+
+<%= link_to 'Back to tasklist', tasklist_path(@tasklist) %>

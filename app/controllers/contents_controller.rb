@@ -14,9 +14,10 @@ class ContentsController < ApplicationController
   end
 
   def sort
-    params[:content].each_with_index do |id, index|
-        Content.where(id: id).update_all(position: index + 1)
+    params[:order].each do |key,value|
+      Content.find(value[:id]).update_attribute(:position,value[:position])
     end
+    render :nothing => true
   end
 
   def create
