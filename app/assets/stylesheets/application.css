@@ -193,3 +193,7 @@ span.tasklist_context::before{
 .edit-border{
   border: 1px dashed #808080;
 }
+
+#json_content{
+  font-size: 14px;
+}

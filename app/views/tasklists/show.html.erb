@@ -8,6 +8,7 @@
     <p><%= @tasklist.description %></p>
 
     <div data-module="gemtasklist" class="tasklist">
+      <p><%= link_to 'Add a step', new_tasklist_step_path(@tasklist) %></p>
       <ol class="tasklist_groups">
         <% @tasklist.steps.each do |step| %>
           <li class="tasklist_group">
@@ -22,17 +23,28 @@
                 <% unless step.description.empty? %>
                   <p class="tasklist_paragraph"><%= step.description %></p>
                 <% end %>
-                <ol class="tasklist_links_list<% unless step.optional? %> required<% end %>">
+
+
+                <ol class="sortable tasklist_links_list<% unless step.optional? %> required<% end %>">
                   <% step.contents.each do |content| %>
-                    <li class="tasklist_link">
-                      <a class="tasklist_link_item" href="<%= content.url %>"><%= content.text %></a>
-                      <% unless content.context.empty? %><span class="tasklist_context"> <%= content.context %></span><% end %>
-                        <span class="editor"><%= link_to 'Edit', edit_tasklist_step_content_path(@tasklist, step, content) %> | <%= link_to 'Delete', tasklist_step_content_path(@tasklist, step, content), method: :delete, data: { confirm: 'Are you sure?' } %></span>
-                    </li>
+                    <div class="content_item" data-id="<%= content.id %>">
+                      <% case content.content_type %>
+                      <% when "paragraph" %>
+                        <p class="tasklist_content"><%= content.text %> <span class="editor"><%= link_to 'Edit', edit_tasklist_step_content_path(@tasklist, step, content) %> | <%= link_to 'Delete', tasklist_step_content_path(@tasklist, step, content), method: :delete, data: { confirm: 'Are you sure?' } %></span></p>
+
+                      <% when "link" || "list"%>
+                        <li class="tasklist_link tasklist_content">
+                          <a class="tasklist_link_item" href="<%= content.url %>"><%= content.text %></a>
+                          <% unless content.context.empty? %><span class="tasklist_context"> <%= content.context %></span><% end %>
+                            <span class="editor"><%= link_to 'Edit', edit_tasklist_step_content_path(@tasklist, step, content) %> | <%= link_to 'Delete', tasklist_step_content_path(@tasklist, step, content), method: :delete, data: { confirm: 'Are you sure?' } %></span>
+                        </li>
+                      <% end %>
+                    </div>
+
                   <% end %>
                 </ol>
                 <p class="editor"><%= link_to 'Add content', new_tasklist_step_content_path(@tasklist, step) %></p>
-                <p class="editor"><%= link_to 'Reorder content', tasklist_step_contents_path(@tasklist, step) %></p>
+                <p class="editor"><%= link_to 'Reorder content', sort_tasklist_step_contents_path(@tasklist, step) %></p>
               </div>
             </div>
           </li>
@@ -40,7 +52,7 @@
       </ol>
     </div>
   </div>
-  
+
   <div class="column-one-third">
     <button onclick="toggleJSON()" id="json_button">Show JSON</button>
     <p><a href="">View raw JSON</a></p>

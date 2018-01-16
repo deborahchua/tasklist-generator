@@ -1,3 +1,4 @@
+var loadEditor
 function toggleJSON() {
     var json_content = document.getElementById("json_content");
     if (json_content.style.display === "none") {
@@ -7,10 +8,18 @@ function toggleJSON() {
     }
 }
 
-$( document ).ready(function() {
-  $("li.tasklist_link").hover(function(){
+loadEditor = function() {
+  $(".tasklist_content").hover(function(){
     $(this).addClass("edit-border");
     }, function(){
     $(this).removeClass("edit-border");
   });
-});
+
+  $(".tasklist_title").hover(function(){
+    $(this).addClass("edit-border");
+    }, function(){
+    $(this).removeClass("edit-border");
+  });
+}
+
+$(document).on('turbolinks:load', loadEditor);

@@ -2,11 +2,10 @@ Rails.application.routes.draw do
   resources :tasklists do
     resources :steps do
       resources :contents do
-        collection do
-          patch :sort
-        end
+          put :sort, on: :collection
       end
     end
+
   end
 
   root 'tasklists#index'
