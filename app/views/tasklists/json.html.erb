@@ -11,7 +11,7 @@
           "title": "<%= step.title %>",<br>
           "optional": <%= step.optional %>,<br>
           "contents": [ //for each paragraph/link<br>
-          <%= step.contents.each do |content| %>
+          <% step.contents.each do |content| %>
             {<br>
               "type": "<%= content.content_type %>",<br>
               <% case content.content_type %>

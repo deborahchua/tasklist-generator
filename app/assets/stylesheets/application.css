@@ -1,15 +1,195 @@
 /*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
- * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *
- *= require_tree .
- *= require_self
- */
+* This is a manifest file that'll be compiled into application.css, which will include all the files
+* listed below.
+*
+* Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+* or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+*
+* You're free to add application-wide styles to this file and they'll appear at the bottom of the
+* compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+* files in this directory. Styles in this file should be added after the last require_* statement.
+* It is generally better to create a new file per style scope.
+*
+*= require_tree .
+*= require_self
+*/
+
+#wrapper{
+  margin: 0 30px;
+  max-width: 960px;
+}
+
+.wrapper, .content{
+  display: block;
+}
+
+body{
+  font-size: 160%;
+  font-family: Arial, sans-serif;
+}
+
+.grid-row {
+  margin: 0 -15px;
+}
+
+.column-two-thirds {
+  float: left;
+  width: 66.6666666667%;
+}
+
+.column-one-third {
+  float: left;
+  width: 33.3333333333%;
+}
+
+h1{
+  font-size: 36px;
+  font-weight: 700;
+  text-transform: none;
+  line-height: 1.1111111111;
+}
+
+h2{
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 1.4;
+}
+
+h2.tasklist_title{
+  padding: 0;
+  margin: 0;
+}
+
+p{
+  font-size: 19px;
+}
+
+a{
+  text-decoration: none;
+}
+
+a:hover{
+  text-decoration: underline;
+}
+
+a:visited {
+    color: #4c2c92;
+}
+
+a:link {
+    color: #005ea5;
+}
+
+.edit_tasklist_details{
+  border: solid 3px #bfc1c3;
+}
+
+ol{
+  padding: 0;
+  margin: 0;
+}
+
+ol li.tasklist_group{
+  padding-left: 60px;
+  position: relative;
+  list-style: none;
+  display: list-item;
+}
+
+.tasklist_group:last-child:before {
+    content: "";
+    position: absolute;
+    z-index: 6;
+    bottom: 0;
+    left: 0;
+    margin-left: 10.5px;
+    width: 13px;
+    height: 0;
+    border-bottom: solid 3px #bfc1c3;
+}
+
+.tasklist_circle{
+  top: 30px;
+  width: 35px;
+  height: 35px;
+  box-sizing: border-box;
+  position: absolute;
+  z-index: 5;
+  border-width: 3px;
+  background: #fff;
+  border-radius: 100px;
+  text-align: center;
+  left: 0;
+  border: solid 3px #bfc1c3;
+}
+
+.tasklist_circle_inner{
+  float: right;
+  min-width: 100%;
+  font-size: 19px;
+  line-height: 30px;
+  font-weight: bold;
+}
+
+.tasklist_step{
+  position: relative;
+  vertical-align: baseline;
+
+}
+
+.tasklist_step:after {
+  top: 30px;
+  left: -45px;
+  position: absolute;
+  z-index: 2;
+  width: 0;
+  height: 100%;
+  content: "";
+  border-left: solid 3px #bfc1c3;
+  background: #fff;
+  margin-left: 1px;
+}
+
+.tasklist_header{
+  padding: 30px 0;
+  border-top: solid 2px #dee0e2;
+}
+
+.tasklist_paragraph{
+  margin-top: 0;
+}
+
+ol.tasklist_links_list{
+  padding-bottom: 20px;
+}
+
+li.tasklist_link{
+  display: list-item;
+  margin-bottom: 10px;
+  list-style: none;
+}
+a.tasklist_link_item{
+  font-weight: bold;
+  font-size: 19px;
+}
+
+
+
+span.tasklist_context{
+  font-weight: normal;
+  font-size: 19px;
+  color: #6f777b;
+}
+
+span.tasklist_context::before{
+  content: " \2013 ";
+}
+
+.editor a{
+  font-size: 19px;
+  color: #ff0000;
+}
+
+.edit-border{
+  border: 1px dashed #808080;
+}

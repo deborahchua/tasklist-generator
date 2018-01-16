@@ -1,10 +1,98 @@
-<h1>Tasklist: <%= @tasklist.title %></h1>
 
-<p><%= link_to "Edit tasklist details", edit_tasklist_path(@tasklist) %></p>
+<div class="grid-row">
+  <div class="column-two-thirds">
+    <h1><%= @tasklist.title %>
+      <span class="editor"><%= link_to "Edit", edit_tasklist_path(@tasklist) %></span>
+    </h1>
 
-<p><%= link_to "Preview tasklist", tasklist_path(@tasklist) %></p>
+    <p><%= @tasklist.description %></p>
 
-<p><%= link_to "View json [use partial js hidden]", tasklist_path(@tasklist) %></p>
+    <div data-module="gemtasklist" class="tasklist">
+      <ol class="tasklist_groups">
+        <% @tasklist.steps.each do |step| %>
+          <li class="tasklist_group">
+            <span class="tasklist_circle">
+              <span class="tasklist_circle_inner"><%= step.step_number %></span>
+            </span>
+            <div class="tasklist_step">
+              <div class="tasklist_header">
+                  <h2 class="tasklist_title"><%= step.title %> <span class="editor"><%= link_to 'Edit step', edit_tasklist_step_path(@tasklist, step) %> | <%= link_to 'Delete step', [step.tasklist, step], method: :delete, data: { confirm: 'Are you sure?' } %></span></h2>
+              </div>
+              <div class="tasklist_panel step_panel">
+                <% unless step.description.empty? %>
+                  <p class="tasklist_paragraph"><%= step.description %></p>
+                <% end %>
+                <ol class="tasklist_links_list<% unless step.optional? %> required<% end %>">
+                  <% step.contents.each do |content| %>
+                    <li class="tasklist_link">
+                      <a class="tasklist_link_item" href="<%= content.url %>"><%= content.text %></a>
+                      <% unless content.context.empty? %><span class="tasklist_context"> <%= content.context %></span><% end %>
+                        <span class="editor"><%= link_to 'Edit', edit_tasklist_step_content_path(@tasklist, step, content) %> | <%= link_to 'Delete', tasklist_step_content_path(@tasklist, step, content), method: :delete, data: { confirm: 'Are you sure?' } %></span>
+                    </li>
+                  <% end %>
+                </ol>
+                <p class="editor"><%= link_to 'Add content', new_tasklist_step_content_path(@tasklist, step) %></p>
+                <p class="editor"><%= link_to 'Reorder content', tasklist_step_contents_path(@tasklist, step) %></p>
+              </div>
+            </div>
+          </li>
+        <% end %>
+      </ol>
+    </div>
+  </div>
+  
+  <div class="column-one-third">
+    <button onclick="toggleJSON()" id="json_button">Show JSON</button>
+    <p><a href="">View raw JSON</a></p>
+    <div id="json_content">
+    <p>JSON</p>
+    {<br>
+      "title": "<%= @tasklist.title %>",<br>
+      "base_path": "<%= @tasklist.base_path %>",<br>
+      "description": "<%= @tasklist.description %>",<br>
+      "tasklist": {<br>
+        "groups": [<br>
+        <% @tasklist.steps.each do |step| %>
+          [<br> (beginning of step)
+            {<br>
+              "title": "<%= step.title %>",<br>
+              "optional": <%= step.optional %>,<br>
+              "contents": [ //for each paragraph/link<br>
+              <% step.contents.each do |content| %>
+                {<br>
+                  "type": "<%= content.content_type %>",<br>
+                  <% case content.content_type %>
+                  <% when "paragraph" %>
+                    "text": "<%= content.text %>",<br>
+                  <% when "list"%>
+                    <strong>list</strong>
+                    "style": "<%= content.style %>",<br>
+                    "contents": [ //for loop through Step.Content.links<br>
+                      {<br>
+                        "href": "<%= content.url %>",<br>
+                        "text": "<%= content.text %>",<br>
+                        "context": "<%= content.context %>"<br>
+                      }<br>
+                    ]<br>
+                  <% end %>
+                }<br>
+              <% end %>,
+              ]<br>
+            }<br>
+          ]<br>(end of step)
+          <% end %>
+        ]<br>
+      }<br>
+    }<br><br>
+    </div>
+
+  </div>
+
+</div>
+
+
+<div class="grid-row">
+  <div class="column-two-thirds">
 <p>
   <strong>Tasklist title:</strong>
   <%= @tasklist.title %>
@@ -25,45 +113,7 @@
   <em><%= @tasklist.meta_description %></em>
 </p>
 
-<p>JSON</p>
-{<br>
-  "title": "<%= @tasklist.title %>",<br>
-  "base_path": "<%= @tasklist.base_path %>",<br>
-  "description": "<%= @tasklist.description %>",<br>
-  "tasklist": {<br>
-    "groups": [<br>
-    <% @tasklist.steps.each do |step| %>
-      [<br> (beginning of step)
-        {<br>
-          "title": "<%= step.title %>",<br>
-          "optional": <%= step.optional %>,<br>
-          "contents": [ //for each paragraph/link<br>
-          <%= step.contents.each do |content| %>
-            {<br>
-              "type": "<%= content.content_type %>",<br>
-              <% case content.content_type %>
-              <% when "paragraph" %>
-                "text": "<%= content.text %>",<br>
-              <% when "list"%>
-                <strong>list</strong>
-                "style": "<%= content.style %>",<br>
-                "contents": [ //for loop through Step.Content.links<br>
-                  {<br>
-                    "href": "<%= content.url %>",<br>
-                    "text": "<%= content.text %>",<br>
-                    "context": "<%= content.context %>"<br>
-                  }<br>
-                ]<br>
-              <% end %>
-            }<br>
-          <% end %>,
-          ]<br>
-        }<br>
-      ]<br>(end of step)
-      <% end %>
-    ]<br>
-  }<br>
-}<br><br>
+
 
 <hr>
 
@@ -105,7 +155,7 @@
   <p><%= link_to 'Add content', new_tasklist_step_content_path(@tasklist, step) %></p>
   <p><%= link_to 'Reorder content', tasklist_step_contents_path(@tasklist, step) %></p>
 <div id="contents" data-url=" ">
-  <%= step.contents.each do |content| %>
+  <% step.contents.each do |content| %>
 
       <div class="test">
         <p>Position: <%= content.position %></p>
@@ -167,3 +217,5 @@
 
 
 <%= link_to 'Edit', edit_tasklist_path(@tasklist) %> | <%= link_to 'Back to tasklists', tasklists_path %>
+</div>
+</div>

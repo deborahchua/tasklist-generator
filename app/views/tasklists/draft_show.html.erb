@@ -1,0 +1,136 @@
+<div class="grid-row">
+  <div class="column-two-thirds">
+    <h1>Tasklist: <%= @tasklist.title %></h1>
+
+    <p><%= @tasklist.description %></p>
+  </div>
+</div>
+<p><%= link_to "Edit tasklist details", edit_tasklist_path(@tasklist) %></p>
+
+<p><%= link_to "Preview tasklist", tasklist_path(@tasklist) %></p>
+
+<p><%= link_to "View json [use partial js hidden]", tasklist_path(@tasklist) %></p>
+<p>
+  <strong>Tasklist title:</strong>
+  <%= @tasklist.title %>
+</p>
+
+<p>
+  <strong>Base path:</strong>
+  <%= @tasklist.base_path %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @tasklist.description %>
+</p>
+
+<p>
+  <strong>Meta description:</strong>
+  <em><%= @tasklist.meta_description %></em>
+</p>
+
+
+
+<hr>
+
+<h2>Steps</h2>
+
+<p><%= link_to 'Add a step', new_tasklist_step_path(@tasklist) %></p>
+
+<% @tasklist.steps.each do |step| %>
+
+  <h3><strong>Step <%= step.step_number %> <%= step.title %></strong></h3>
+
+  <p>
+    <%= link_to 'Edit step', edit_tasklist_step_path(@tasklist, step) %> | <%= link_to 'Delete step', [step.tasklist, step],
+    method: :delete,
+    data: { confirm: 'Are you sure?' } %>
+  </p>
+
+  <p>
+    <strong>Step number:</strong>
+    <%= step.step_number %>
+  </p>
+
+  <p>
+    <strong>Title:</strong>
+    <%= step.title %>
+  </p>
+
+  <p>
+    <strong>Description:</strong>
+    <%= step.description %>
+  </p>
+  <p>
+    <strong>Optional:</strong>
+    <%= step.optional %>
+  </p>
+
+  <h2>Content</h2>
+
+  <p><%= link_to 'Add content', new_tasklist_step_content_path(@tasklist, step) %></p>
+  <p><%= link_to 'Reorder content', tasklist_step_contents_path(@tasklist, step) %></p>
+<div id="contents" data-url=" ">
+  <% step.contents.each do |content| %>
+
+      <div class="test">
+        <p>Position: <%= content.position %></p>
+      <p>
+        <% case content.content_type %>
+        <% when "paragraph" %>
+        <strong>paragraph</strong>
+        <% when "link"%>
+        <strong>link</strong>
+        <% when "list"%>
+        <strong>list</strong>
+        <% else %>
+        <strong>Content type not set</strong>
+        <% end %>
+      </p>
+
+      <p>
+        <strong>Type:</strong>
+        <%= content.content_type %>
+      </p>
+      <p>
+        <strong>Text:</strong>
+        <%= content.text %>
+      </p>
+      <p>
+        <strong>Url:</strong>
+        <%= content.url %>
+      </p>
+
+      <% unless content.context.empty? %>
+      <p>
+        <strong>Context:</strong>
+        <%= content.context %>
+      </p>
+      <% end %>
+
+      <% if content.content_type.eql?("list") %>
+      <p>
+        <strong>List style:</strong>
+        <%= content.style %>
+      </p>
+
+    <% end %>
+
+    <p>
+      <%= link_to 'Edit content', edit_tasklist_step_content_path(@tasklist, step, content) %> |
+      <%= link_to 'Delete content', tasklist_step_content_path(@tasklist, step, content),
+      method: :delete,
+      data: { confirm: 'Are you sure?' } %>
+    </p>
+    <p>==================================</p>
+</div>
+  <% end %>
+
+<% end %>
+</div>
+<hr />
+
+
+
+<%= link_to 'Edit', edit_tasklist_path(@tasklist) %> | <%= link_to 'Back to tasklists', tasklists_path %>
