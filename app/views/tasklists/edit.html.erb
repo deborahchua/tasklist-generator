@@ -1,43 +1,49 @@
-<h1>Edit tasklist</h1>
+<div class="grid-row">
+  <div class="column-two-thirds">
+    <h1>Edit tasklist: <br>
+      <%= @tasklist.title %>
+    </h1>
 
-<%= form_for :tasklist, url: tasklist_path, :method => :PUT do |form| %>
-  <% if @tasklist.errors.any? %>
-    <div id="error_explanation">
-      <h2>
-        <%= pluralize(@tasklist.errors.count, "error") %> prohibited
-        this article from being saved:
-      </h2>
-      <ul>
-        <% @tasklist.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-  <p>
-    <%= form.label :title %><br>
-    <%= form.text_field :title %>
-  </p>
+    <%= form_for :tasklist, url: tasklist_path, :method => :PUT do |form| %>
+      <% if @tasklist.errors.any? %>
+        <div id="error_explanation">
+          <h2>
+            <%= pluralize(@tasklist.errors.count, "error") %> prohibited
+            this article from being saved:
+          </h2>
+          <ul>
+            <% @tasklist.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+      <p>
+        <%= form.label :title %><br>
+        <%= form.text_field :title %>
+      </p>
 
-  <p>
-    <%= form.label :base_path %><br>
-    <%= form.text_field :base_path %>
-  </p>
+      <p>
+        <%= form.label :base_path %><br>
+        <%= form.text_field :base_path %>
+      </p>
 
-  <p>
-    <%= form.label :description %><br>
-    <%= form.text_area :description %>
-  </p>
+      <p>
+        <%= form.label :description %><br>
+        <%= form.text_area :description %>
+      </p>
 
-  <p>
-    <%= form.label :meta_description %><br>
-    <%= form.text_area :meta_description %>
-  </p>
+      <p>
+        <%= form.label :meta_description %><br>
+        <%= form.text_area :meta_description %>
+      </p>
 
-  <p>
-    <%= form.submit %>
-  </p>
-<% end %>
+      <p>
+        <%= form.submit %>
+      </p>
+    <% end %>
 
 
-<%= link_to 'Back to tasklist', tasklist_path(@tasklist) %> | <%= link_to 'Back to tasklists index', tasklists_path %>
+    <p><%= link_to 'Back to tasklist', tasklist_path(@tasklist) %> | <%= link_to 'Back to tasklists index', tasklists_path %></p>
+  </div>
+</div>

@@ -1,23 +1,27 @@
-<h2>Edit step: <%= @step.step_number %> <%= @step.title %></h2>
+<div class="grid-row">
+  <div class="column-two-thirds">
+    <h2>Edit step: <%= @step.step_number %> <%= @step.title %></h2>
 
-<%= form_for :step, url: tasklist_step_path, :method => :PUT do |f| %>
-  <p>
-    <%= f.label :step_number, "Step number" %><br>
-    <%= f.text_field :step_number %>
-  </p>
-  <p>
-    <%= f.label :title, "Title" %><br>
-    <%= f.text_field :title %>
-  </p>
-  <p>
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
-  </p>
+    <%= form_for :step, url: tasklist_step_path, :method => :PUT do |f| %>
+    <p>
+      <%= f.label :step_number, "Step number" %><br>
+      <%= f.text_field :step_number %>
+    </p>
+    <p>
+      <%= f.label :title, "Title" %><br>
+      <%= f.text_field :title %>
+    </p>
+    <p>
+      <%= f.label :description %><br>
+      <%= f.text_area :description %>
+    </p>
 
-  <p>
-    Optional step? <%= f.check_box :optional %>
-  </p>
-  <p>
-    <%= f.submit %>
-  </p>
-<% end %>
+    <p>
+      Optional step? <%= f.check_box :optional %>
+    </p>
+    <p>
+      <%= f.submit %>
+    </p>
+    <% end %>
+  </div>
+</div>
