@@ -1,14 +1,18 @@
-<h2><%= @step.title %></h2>
-<div class="sortable" id="contents">
-<% @step.contents.each do |content| %>
-  <div class="tasklist_content content_item" data-id="<%= content.id %>">
-      <p>Position: <%= content.position %></p>
-    <p>
-      <strong>Text:</strong>
-      <%= content.text %>
-    </p>
+<div class="grid-row">
+  <div class="column-two-thirds">
+    <h2><%= @step.title %></h2>
+    <div class="sortable" id="contents">
+    <% @step.contents.each do |content| %>
+      <div class="tasklist_content content_item" data-id="<%= content.id %>">
+          <p>Position: <%= content.position %></p>
+        <p>
+          <strong>Text:</strong>
+          <%= content.text %>
+        </p>
+      </div>
+
+      <% end %></div>
+
+    <p><%= link_to 'Back to tasklist', tasklist_path(@tasklist) %></p>
   </div>
-
-  <% end %></div>
-
-<p><%= link_to 'Back to tasklist', tasklist_path(@tasklist) %></p>
+</div>

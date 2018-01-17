@@ -1,33 +1,39 @@
-<h2>Edit content:</h2>
+<div class="grid-row">
+  <div class="column-two-thirds">
+    <h2>Edit content:</h2>
 
-<div id="edit-content">
-  <%=  form_for :content, url: tasklist_step_content_path, :method => :PUT do |f| %>
-    <p>
-      <%= f.radio_button :content_type, "paragraph" %>
-      <%= f.label :content_type, "Paragraph" %>
-      <%= f.radio_button :content_type, "list" %>
-      <%= f.label :content_type, "List" %>
-    </p>
-    <p>
-      <%= f.label :text, "Text / link text" %><br>
-      <%= f.text_area :text %>
-    </p>
-    <p>
-      <%= f.label :url %><br>
-      <%= f.text_field :url %>
-    </p>
-    <p>
-      <%= f.label :context, "Context e.g. cost details" %><br>
-      <%= f.text_field :context %>
-    </p>
+    <div id="edit-content">
+      <%=  form_for :content, url: tasklist_step_content_path, :method => :PUT do |f| %>
+        <p>
+          <%= f.radio_button :content_type, "paragraph" %>
+          <%= f.label :content_type, "Paragraph" %>
+          <%= f.radio_button :content_type, "link" %>
+          <%= f.label :content_type, "Link" %>
+          <%= f.radio_button :content_type, "list" %>
+          <%= f.label :content_type, "List" %>
+        </p>
+        <p>
+          <%= f.label :text, "Text / link text" %><br>
+          <%= f.text_area :text %>
+        </p>
+        <p>
+          <%= f.label :url %><br>
+          <%= f.text_field :url %>
+        </p>
+        <p>
+          <%= f.label :context, "Context e.g. cost details" %><br>
+          <%= f.text_field :context %>
+        </p>
 
-    <p>
-      <%= f.label :style, "List style" %><br>
-      <%= f.select :style, ['required', 'choice']%>
-    </p>
-    <p>
-      <%= f.submit %>
-    </p>
-  <% end %> <br>
+        <p>
+          <%= f.label :style, "List style" %><br>
+          <%= f.select :style, ['required', 'choice']%>
+        </p>
+        <p>
+          <%= f.submit %>
+        </p>
+      <% end %> <br>
 
+    </div>
+  </div>
 </div>
