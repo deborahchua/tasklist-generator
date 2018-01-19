@@ -1,5 +1,5 @@
 <div class="grid-row">
-  <div class="column-two-thirds">
+  <div class="column-half">
     <h1>Edit tasklist: <br>
       <%= @tasklist.title %>
     </h1>
@@ -45,5 +45,10 @@
 
 
     <p><%= link_to 'Back to tasklist', tasklist_path(@tasklist) %> | <%= link_to 'Back to tasklists index', tasklists_path %></p>
+  </div>
+
+  <div class="column-half">
+
+    <div class="image"><%= image_tag "tasklist_section_edit_visual.png" %></div>
   </div>
 </div>

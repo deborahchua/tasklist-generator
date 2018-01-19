@@ -32,6 +32,11 @@ body{
   margin: 0 -15px;
 }
 
+.column-half{
+  float: left;
+  width: 50%;
+}
+
 .column-two-thirds {
   float: left;
   width: 66.6666666667%;
@@ -78,6 +83,10 @@ a:visited {
 
 a:link {
     color: #005ea5;
+}
+
+.image img{
+  width: 100%;
 }
 
 .edit_tasklist_details{
