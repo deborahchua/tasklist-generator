@@ -9,10 +9,32 @@
   </head>
 
   <body>
+    <div id="tasklist-editor-nav">
+      
+    </div>
     <div class="wrapper" id="wrapper">
       <main id="content" role="main" class="content">
         <%= yield %>
       </main>
     </div>
+    <script>
+      $(".edit-button").click(function(){
+        $(".editor").toggle();
+
+        if ($("#edit-button").hasClass("disabled")){
+          $("#edit-button").removeClass("disabled").addClass("enabled");
+        }
+        else{
+          $("#edit-button").removeClass("enabled").addClass("disabled");
+        }
+
+        if ($("#tasklist-wrapper").hasClass("no-border")) {
+          $("#tasklist-wrapper").removeClass("no-border").addClass("tasklist-wrapper-border");
+        }
+        else {
+          $("#tasklist-wrapper").removeClass("tasklist-wrapper-border").addClass("no-border");
+        }
+      });
+    </script>
   </body>
 </html>

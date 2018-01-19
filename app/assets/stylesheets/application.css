@@ -15,7 +15,7 @@
 */
 
 #wrapper{
-  margin: 0 30px;
+  margin: 60px 30px 0 30px ;
   max-width: 960px;
 }
 
@@ -185,9 +185,76 @@ span.tasklist_context::before{
   content: " \2013 ";
 }
 
+/* Editor styles */
+#tasklist-editor-nav{
+  margin: 0;
+  overflow: : hidden;
+  /* background-color: #333; */
+  /* opacity: 0.3; */
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 6;
+}
+
+.preview-button{
+  background-color: white; /* Green */
+  border: 2px solid #4CAF50;
+  border-radius: 12px;
+  color: black;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  float: right;
+}
+
+.preview-button:hover{
+  background-color: #4CAF50;
+  color: black;
+  border: 2px solid #4CAF50;
+}
+
+.edit-button{
+  position: fixed;
+  z-index: 6;
+  right: 0;
+  border-radius: 12px;
+  border: 2px solid #ff0000;
+  color: black;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  float: right;
+  margin-right: 30px;
+}
+
+.disabled{
+  background-color: white;
+}
+
+.enabled, .disabled:hover{
+  background-color: #ff0000;
+}
+
+.editor{
+  display: none;
+}
+
 .editor a{
   font-size: 19px;
   color: #ff0000;
+}
+
+.no-border{
+  border: 2px solid white;
+}
+
+.tasklist-wrapper-border{
+  border: 2px solid #ff0000;
 }
 
 .edit-border{
@@ -196,4 +263,5 @@ span.tasklist_context::before{
 
 #json_content{
   font-size: 14px;
+  display: none;
 }
