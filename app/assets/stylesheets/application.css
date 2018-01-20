@@ -182,7 +182,9 @@ a.tasklist_link_item{
   font-size: 19px;
 }
 
-
+.padding-top{
+  padding-top: 60px;
+}
 
 span.tasklist_context{
   font-weight: normal;
@@ -206,17 +208,26 @@ span.tasklist_context::before{
   z-index: 6;
 }
 
-.preview-button{
+.button-holder{
+  margin-bottom: 35px;
+}
+
+.button{
   background-color: white; /* Green */
-  border: 2px solid #4CAF50;
+  border: 2px solid #e7e7e7;
   border-radius: 12px;
   color: black;
-  padding: 15px 32px;
+  padding: 6px 9px;
+  margin-right: 5px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  float: right;
+  float: left;
+}
+
+.button:hover{
+  background-color: #e7e7e7;
 }
 
 .preview-button:hover{
@@ -262,6 +273,10 @@ span.tasklist_context::before{
   border: 2px solid white;
 }
 
+#tasklist-wrapper{
+  padding-right: 15px;
+}
+
 .tasklist-wrapper-border{
   border: 2px solid #ff0000;
 }
@@ -271,6 +286,7 @@ span.tasklist_context::before{
 }
 
 #json_content{
+  padding: 15px;
+  border: 1px solid #a8a8a8;
   font-size: 14px;
-  display: none;
 }
