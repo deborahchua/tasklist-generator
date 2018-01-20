@@ -1,7 +1,6 @@
 
 <button id="edit-button" class="edit-button disabled" type="button" name="edit">Edit</button>
-<div class="grid-row">
-
+<div class="grid-row padding-top">
     <div class="column-two-thirds">
       <div id="tasklist-wrapper" class="no-border">
         <div class="tasklist_content">
@@ -55,10 +54,11 @@
     </div>
   </div>
   <div class="column-one-third">
-    <button onclick="toggleJSON()" id="json_button">Show JSON</button>
-    <p><a href="">View raw JSON</a></p>
+    <div class="button-holder">
+      <button onclick="toggleJSON()" id="json_button" class="button">Show JSON</button>
+      <button id="json_copy" data-clipboard-target="#json_content" class="button copy_button">Copy JSON to clipboard</button>
+    </div>
     <div id="json_content">
-    <p>JSON</p>
     {<br>
       "title": "<%= @tasklist.title %>",<br>
       "base_path": "<%= @tasklist.base_path %>",<br>

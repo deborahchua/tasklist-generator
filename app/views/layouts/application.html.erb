@@ -10,13 +10,15 @@
 
   <body>
     <div id="tasklist-editor-nav">
-      
+
     </div>
     <div class="wrapper" id="wrapper">
       <main id="content" role="main" class="content">
         <%= yield %>
       </main>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@1/dist/clipboard.min.js"></script>
+
     <script>
       $(".edit-button").click(function(){
         $(".editor").toggle();
@@ -34,6 +36,16 @@
         else {
           $("#tasklist-wrapper").removeClass("tasklist-wrapper-border").addClass("no-border");
         }
+      });
+
+      var clipboard = new Clipboard('.copy_button');
+
+      clipboard.on('success', function(e) {
+          // console.info('Action:', e.action);
+          // console.info('Text:', e.text);
+          // console.info('Trigger:', e.trigger);
+          window.alert("Copied to clipboard: " + e.text)
+          e.clearSelection();
       });
     </script>
   </body>
