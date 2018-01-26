@@ -31,7 +31,7 @@
                         <% when "paragraph" %>
                           <p class="tasklist_content"><%= content.text %> <span class="editor"><%= link_to 'Edit', edit_tasklist_step_content_path(@tasklist, step, content) %> | <%= link_to 'Delete', tasklist_step_content_path(@tasklist, step, content), method: :delete, data: { confirm: 'Are you sure?' } %></span></p>
 
-                        <% when "link" || "list"%>
+                        <% when "link" %>
                           <li class="tasklist_link tasklist_content">
                             <a class="tasklist_link_item" href="<%= content.url %>"><%= content.text %></a>
                             <% unless content.context.empty? %><span class="tasklist_context"> <%= content.context %></span><% end %>
@@ -65,34 +65,34 @@
       "description": "<%= @tasklist.description %>",<br>
       "tasklist": {<br>
         "groups": [<br>
-        <% @tasklist.steps.each do |step| %>
-          [<br> (beginning of step)
+        <% @tasklist.steps.each_with_index do |step, index| %>
             {<br>
               "title": "<%= step.title %>",<br>
               "optional": <%= step.optional %>,<br>
-              "contents": [ //for each paragraph/link<br>
-              <% step.contents.order(:position).each do |content| %>
+              "contents": [ <br>
+              <% step.contents.order(:position).each_with_index do |content, index| %>
                 {<br>
                   "type": "<%= content.content_type %>",<br>
                   <% case content.content_type %>
                   <% when "paragraph" %>
-                    "text": "<%= content.text %>",<br>
-                  <% when "list"%>
-                    <strong>list</strong>
+                    "text": "<%= content.text %>"<br>
+                  <% when "link"%>
                     "style": "<%= content.style %>",<br>
-                    "contents": [ //for loop through Step.Content.links<br>
+                    "contents": [ <br>
                       {<br>
                         "href": "<%= content.url %>",<br>
-                        "text": "<%= content.text %>",<br>
-                        "context": "<%= content.context %>"<br>
+                        "text": "<%= content.text %>"<br>
+                        <% unless content.context.empty? %>
+                          ,<br>
+                          "context": "<%= content.context %>"<br>
+                        <% end %>
                       }<br>
                     ]<br>
                   <% end %>
-                }<br>
-              <% end %>,
+                }<% unless step.contents.size-1 == index %>,<% end %><br>
+              <% end %>
               ]<br>
-            }<br>
-          ]<br>(end of step)
+            }<% unless @tasklist.steps.size-1 == index %>,<% end %><br>
           <% end %>
         ]<br>
       }<br>
