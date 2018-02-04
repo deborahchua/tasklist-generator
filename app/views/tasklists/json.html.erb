@@ -17,7 +17,7 @@
               <% case content.content_type %>
               <% when "paragraph" %>
                 "text": "<%= content.text %>",<br>
-              <% when "list"%>
+              <% when "link"%>
                 <strong>list</strong>
                 "style": "<%= content.style %>",<br>
                 "contents": [ //for loop through Step.Content.links<br>
